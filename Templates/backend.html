@@ -1,0 +1,21 @@
+{% extends "initNew.html" %}
+{%load static%}
+{% block title%} Backend Site {%endblock%}
+{%block body%}
+
+<br>
+<br>
+<form action="/backend_uid/" method="post"> 
+  {% csrf_token %}
+  <div class="px-8 py-8">
+  <p class="capitalize"> Please Enter The U_ID received on email to continue!! </p>
+    <div class="form-group py-8">
+    <input type="text" class="form-control hover:border-2 hover:border-red-500" id="u_id" name="u_id" placeholder="Enter U_id" style="background:background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0.7502188375350141) 0%, rgba(255,255,255,0.75) 100%)">
+     </div>
+    <button class="px-1 py-1 border-2 border-indigo-700 border-dotted hover:text-white hover:bg-indigo-700 rounded-md" type="submit">Submit</button>
+  </form>
+</div>
+
+
+{%endblock%}

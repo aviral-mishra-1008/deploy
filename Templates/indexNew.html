@@ -1,0 +1,147 @@
+{% extends 'initNew.html' %} 
+{%load static%}
+{% block head %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script> 
+<style> 
+  body{ 
+    overflow-y:auto; 
+  } 
+    .grid{ 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(25%, 1fr)); 
+        position:relative; 
+        gap: 10px; 
+        padding: 2rem; 
+        margin-top: 10px; 
+      } 
+      img{ 
+        max-width: 100%; 
+        border-radius: 1rem; 
+      } 
+       
+      @media (max-width: 768px) { 
+        .grid { 
+          grid-template-columns: repeat(auto-fill, minmax(40%, 1fr)); 
+        } 
+      } 
+       
+      @media (max-width: 480px) { 
+        .grid { 
+          grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); 
+        } 
+      } 
+</style> 
+
+<style>
+.success{
+  padding:10px;
+  background:#7FFFD4;
+}
+
+.error{
+  padding:10px;
+  background:red;
+  color: white;
+}
+
+</style>
+
+
+
+
+ {% comment %} CSS for hover over effect! {% endcomment %}
+
+
+
+{% endblock %} 
+ 
+{% block title %} Samvaad {% endblock %} 
+ 
+{% block body %} 
+
+
+
+
+
+
+<div class="grid"> 
+
+  {%for i in objs%}
+
+  <a href={{i.slug}}>
+  <div
+            class=" h-[300px] w-full  bg-red-400 cursor-pointer rounded-lg relative group"
+        >
+            <div
+                class="rounded-lg z-50 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out cursor-pointer absolute from-black/80 to-transparent bg-gradient-to-t inset-x-0 -bottom-2 pt-30 text-white flex items-end"
+            >
+                <div>
+                    <div
+                        class="transform-gpu  p-4 space-y-3 text-xl group-hover:opacity-100 group-hover:translate-y-0 translate-y-4 pb-10 transform transition duration-300 ease-in-out"
+                    >
+                        <div class="font-bold">{{i.name}}</div>
+
+                        <div class="opacity-60 text-sm ">
+                          {{i.article}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img
+                alt=""
+                class=" w-full h-[300px] rounded-lg  group-hover:scale-110 transition duration-300 ease-in-out"
+                src="{{i.image}}"
+            />
+        </div>
+      </a>      
+ {%endfor%} 
+</div> 
+
+
+<section class="dark:bg-orange-100 dark:text-gray-800">
+	<div class="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12 ">
+		<a rel="noopener noreferrer" href="/article" class="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50">
+			<img src="media\{{key}}.jpg" alt="" class="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500" />
+			<div class="p-6 space-y-2 lg:col-span-5 border-b-2 border-black">
+				<h3 class="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">Culrav Avishkar 2024!</h3>
+				<span class="text-xs dark:text-gray-600">16-22 March, 2024</span>
+				<p>Witness the extravagent celebration and fun in the annual cultural-technical fest of MNNIT through vivid articles</p>
+			</div>
+		</a>
+
+		<div class="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{%for i in arts%}
+			<a rel="noopener noreferrer" href="{{i.slug}}" class="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-50">
+				<img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="{{i.image}}" />
+				<div class="p-6 space-y-2">
+					<h3 class="text-2xl font-semibold group-hover:underline group-focus:underline">{{i.heading}}</h3>
+					<p> {{i.name}} | {{i.branch}} </p>
+					<span class="text-xs dark:text-gray-600">Estimated Time of Reading: {{i.estimated_time}} </span>
+					<p> {{i.article}}</p>
+				</div>
+			</a>
+		{%endfor%}
+		</div> 
+		
+		<div class="flex justify-center">
+			<button type="button" class="px-6 py-3 text-sm rounded-md hover:underline dark:bg-red-500 dark:text-neutral-900"> <a href = '/article'>Load more posts...</a></button>
+		</div>
+	</div>
+</section>
+ 
+<script> 
+  const images = document.querySelectorAll(".grid img"); 
+ 
+  const tl = gsap.timeline(); 
+ 
+  images.forEach((image, index) => { 
+    tl.fromTo( 
+      image, 
+      { x: "120%", opacity: 0, delay: index * 0.2 },  // Adjusted delay 
+      { x: "0%", opacity: 1, width: "100%" } 
+    ); 
+  }); 
+</script> 
+
+
+{% endblock %}

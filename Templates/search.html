@@ -1,0 +1,60 @@
+{% extends 'initNew.html' %}
+
+{% block title %} Search Results {% endblock title %}
+
+
+{% block body %}
+<style>
+    body{
+        background: url('https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-040.jpg')
+    }
+    
+    .bg-dark{
+        background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,0.36074940229998254) 0%, rgba(41,17,22,0.40556732947085083) 35%, rgba(255,219,149,0.4671919793307948) 100%);
+    }
+</style>
+
+<div class="px-8">
+    <div class="px-8 pt-6 text-4xl">
+    <h2>Search results : </h2>
+</div>
+    {% if allPosts|length < 1 %}
+    <div class="px-8 py-8">
+    <b> <p>No search results</p> </b>
+     Your search query : <b>{{query}}</b> did not match any documents. <br> <br>
+     <b> Suggestions:</b>
+     <ul>
+     <li>Make sure that all words are spelled correctly.</li>
+     <li>Try more general keywords.</li>
+    <li> Try meaningful keywords.</li>
+    <li> Try different keywords.</li>
+     </li>
+     </ul>
+    </div>
+ 
+     {% endif %}
+    <div class="px-8 py-8">
+    {% for post in allPosts  %}
+    <div class="border-2 border-stone-400 px-4 py-4 rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+        <div class="flex flex-auto">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Article  by {{post.name}}</strong>
+            <h3 class="mb-0">{{post.heading}}</h3>
+            <div class="mb-1 text-muted"> Estimated Time:{{post.estimated_time}}</div>
+            <p class="card-text mb-auto">{{post.article| truncatechars:255}}</p>
+            <div class="my-2">
+            	<a href="/{{post.slug}}" role="button" class="px-1 py-1 border-2 border-dotted border-yellow-400 rounded-md hover:bg-yellow-400">Continue reading</a>
+            </div>
+            
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src={{post.image}} class='size-48 w-80'>
+        </div>
+        </div>
+    </div>
+
+        {% endfor %}
+</div>
+    </div>
+ {% endblock %}
